@@ -13,4 +13,8 @@ public class InputHelper {
     public static String inputStr() {
         return scanner.next();
     }
+
+    public static void main(String[] args) {
+        int a = 0b100000000;
+    }
 }
