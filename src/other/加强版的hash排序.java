@@ -94,7 +94,7 @@ public class 加强版的hash排序 {
         if (max(nums) > 32) {
             throw new RuntimeException("都说了这个低配DEMO不支持含32以上的数");
         }
-        
+
         // 用1个int作hash桶，可以存放32个数字
         int bucket = 0b00000000000000000000000000000000;
         for (int num : nums) {
