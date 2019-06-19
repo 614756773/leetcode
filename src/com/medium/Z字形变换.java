@@ -1,5 +1,8 @@
 package com.medium;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @Date: 2019/6/18
  * @Author: qinzhu
@@ -12,13 +15,48 @@ public class Z字形变换 {
 
         for (String s1 : s) {
             for (int numRow : numRows) {
-                String result = convert(s1, numRow);
+                String result = convert_2(s1, numRow);
                 System.out.println(result);
             }
         }
     }
 
-    private static String convert(String s, int numRows) {
+    /**
+     * 按行上下扫描访问，当到行顶或者行底部时转换扫描方向
+     */
+    private static String convert_2(String s, int numRows) {
+        if (numRows == 1) {
+            return s;
+        }
+
+        List<StringBuilder> rows = new ArrayList<>();
+        for (int i = 0; i < Math.min(numRows, s.length()); i++) {
+            rows.add(new StringBuilder());
+        }
+
+        char[] chars = s.toCharArray();
+        // 初始行数为0，方向为向下扫描
+        int rowIndex = 0;
+        int direction = 1;
+        for (char ch : chars) {
+            rows.get(rowIndex).append(ch);
+            rowIndex += direction;
+            if (rowIndex == numRows - 1 || rowIndex == 0) {
+                direction = -direction;
+            }
+        }
+        // 输出
+        StringBuilder result = new StringBuilder();
+        for (StringBuilder row : rows) {
+            result.append(row);
+        }
+        return result.toString();
+    }
+
+    /**
+     * 常规思路，先把字符排好序放入一个临时矩阵中，再便利输出矩阵
+     */
+    private static String convert_1(String s, int numRows) {
         if (numRows == 1) {
             return s;
         }
