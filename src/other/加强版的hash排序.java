@@ -70,7 +70,7 @@ public class 加强版的hash排序 {
                     bucketIndex = 31;
                 }
             }
-            // 3.用为操作将该数记录
+            // 3.用位操作将该数记录
             buckets[bucketsIndex] = buckets[bucketsIndex] | masks[bucketIndex];
         }
         // 4.输出
