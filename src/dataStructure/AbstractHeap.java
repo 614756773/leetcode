@@ -109,6 +109,9 @@ public abstract class AbstractHeap<E> {
         elements = newElements;
     }
 
+    /**
+     * 获取左孩子和右孩子当中值较小一个的索引
+     */
     @SuppressWarnings("unchecked")
     private int min(int left, int right) {
         return (compare((E) elements[left], (E) elements[right]) ?
