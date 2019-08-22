@@ -11,7 +11,7 @@ public class 正则表达式匹配 {
 //        System.out.println(isMatch(text[2], pattern[1]));
 //        System.out.println(isMatch_2("aac", "a*c"));
 //        System.out.println(isMatch_2("aab", "c*a*b"));
-        System.out.println(isMatch("abcc", "abc*"));
+        System.out.println(isMatch("abccb", "abc*"));
     }
 
     /**

@@ -1,6 +1,8 @@
 package com.medium;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @Date: 2019/6/24
@@ -8,13 +10,16 @@ import java.util.*;
  */
 public class 三数之和 {
     public static void main(String[] args) {
+        int[] nums0 = new int[]{-1, 0, 1, 2, -1, -4};
+        System.out.println(threeSum(nums0));
+
         int[] nums = new int[]{};
         System.out.println(threeSum(nums));
 
         int[] nums2 = new int[]{-1, 0, 1, 2, -1, -4};
         System.out.println(threeSum(nums2));
 
-        int[] nums3 = new int[]{0, 0, 0};
+        int[] nums3 = new int[]{0, 0, 0, 0};
         System.out.println(threeSum(nums3));
 
         int[] nums4 = new int[]{0, 0};
@@ -27,64 +32,45 @@ public class 三数之和 {
         System.out.println(threeSum(nums6));
     }
 
+    /**
+     * 排序+对撞指针
+     * 难点在于去重。好难受啊去重
+     */
     private static List<List<Integer>> threeSum(int[] nums) {
-//        List<List<Integer>> result = new ArrayList<>();
-        Map<String, List<Integer>> map = new HashMap<>();
-//        Map<Integer, Integer> map = new HashMap<>();
-//        for (int num : nums) {
-//            map.merge(num, 1, (oldValue, newValue) -> oldValue + newValue);
-//        }
+        if (nums.length < 3) {
+            return new ArrayList<>();
+        }
+        List<List<Integer>> result = new ArrayList<>();
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length - 2; i++) {
+            // 如果number为正数了，说明后面的数也全是正数，不可能相加为0
+            if (nums[i] > 0) {
+                break;
+            }
+            // 去重  当上一轮的number1和这一轮的number1相同时，会找出同样的三个数
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
 
-        for (int i = 0; i < nums.length; i++) {
-            int number1 = nums[i];
-            for (int j = i + 1; j < nums.length; j++) {
-                int number2 = nums[j];
-                for (int k = j + 1; k < nums.length; k++) {
-                    int number3 = nums[k];
-                    if (number1 + number2 + number3 == 0) {
-//                        result.add(Arrays.asList(number1, number2, number3));
-                        map.putIfAbsent(key(number1, number2, number3), Arrays.asList(number1, number2, number3));
-                    }
+            int j = i + 1;
+            int k = nums.length - 1;
+            while (j < k) {
+                int sum = nums[i] + nums[j] + nums[k];
+                if (sum == 0) {
+                    result.add(Arrays.asList(nums[i], nums[j], nums[k]));
+                    // 去重
+                    while (j < k && nums[j] == nums[j + 1]){j++;}
+                    while (j < k && nums[k] == nums[k - 1]){k--;}
+                    j++;
+                    k--;
+                } else if(sum > 0) {
+                    k--;
+                } else if (sum < 0) {
+                    j++;
                 }
             }
         }
-/*        for (int number1 : map.keySet()) {
-            Set<Map.Entry<Integer, Integer>> entries = map.entrySet();
-            for (Map.Entry<Integer, Integer> entry : entries) {
-                if (entry.getValue() > 0) {
-                    int number2 = entry.getKey();
-                    int number3 = -number1 - number2;
-//                    if (number1 == number2 && entry.getValue() < 2) {
-//                        continue;
-//                    }
-//                    if (number1 == number3 && map.get(number3) < 2) {
-//                        continue;
-//                    }
-//                    if (number2 == number3 && map.get(number3) < 2) {
-//                        continue;
-//                    }
-//                    if (number1 == number2 && number2 == number3 && map.get(number3) < 3) {
-//                        continue;
-//                    }
-                    Integer canUseCount = map.get(number3);
-                    if (canUseCount != null && canUseCount > 0) {
-                        map.put(number1, map.get(number1) - 1);
-                        map.put(number2, map.get(number2) - 1);
-                        map.put(number3, map.get(number3) - 1);
-                        result.add(Arrays.asList(number1, number2, number3));
-                    }
-                }
-            }
-        }*/
-        return new ArrayList<>(map.values());
-    }
-
-    private static String key(int number1, int number2, int number3) {
-        int max = Math.max(number1, number2);
-        max = Math.min(max, number3);
-        int min = Math.min(number1, number2);
-        min = Math.min(min, number3);
-        return max + "-" + min + "-" + (-max - min);
+        return result;
     }
 
 }
