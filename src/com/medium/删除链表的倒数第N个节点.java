@@ -1,5 +1,7 @@
 package com.medium;
 
+import dataStructure.ListNode;
+
 /**
  * @Date: 2019/8/23
  * @Author: qinzhu
@@ -46,10 +48,3 @@ public class 删除链表的倒数第N个节点 {
     }
 }
 
-class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int x) {
-        val = x;
-    }
-}
