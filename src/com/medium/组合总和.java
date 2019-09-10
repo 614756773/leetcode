@@ -1,60 +1,47 @@
 package com.medium;
 
-import dataStructure.ListNode;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.function.BinaryOperator;
+import java.util.*;
 
 /**
  * @Date: 2019/9/3
  * @Author: qinzhu
  */
 public class 组合总和 {
-    public static void main(String[] args) {
 
+    private static int elements[];
+    private static List<List<Integer>> result = new ArrayList<>();
+    public static void main(String[] args) {
+        组合总和 runner = new 组合总和();
+        int[] candidates = {1,2,3};
+        List<List<Integer>> lists = runner.combinationSum(candidates, 3);
+        System.out.println(lists);
     }
 
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<List<Integer>> result = new ArrayList<>();
+        if (candidates.length == 0) {
+            return result;
+        }
         Arrays.sort(candidates);
-        backtrack(result, candidates, target, 0, new LinkedList<>());
+        elements = candidates;
+        findCombinationSum(target, elements.length, new Stack<>());
         return result;
     }
 
-    /*    输入: candidates = [2,3,5], target = 8,
-        所求解集为:
-                [
-                  [2,2,2,2],
-                  [2,3,3],
-                  [3,5]
-                ]*/
-    private void backtrack(List<List<Integer>> result, int[] candidates, int target, int currentIndex, LinkedList<Integer> group) {
-        int currentNumber = candidates[currentIndex];
-        int tmpResult = reduce(group) + currentNumber;
-        if (tmpResult == target) {
-            group.add(currentNumber);
-            result.add(new ArrayList<>(group));
-            // TODO...
-            return;
-        }
-
-        if (tmpResult < target) {
-            group.add(currentNumber);
-            if (reduce(group) + candidates[currentIndex] <= target) {
-                backtrack(result, candidates, target, currentIndex, group);
+    // 输入: candidates = [2, 3, 6, 7]，target = 7]
+    private void findCombinationSum(int target, int end, Stack<Integer> group) {
+        for (int i = 0; i < end; i++) {
+            int remaining = target - elements[i];
+            if (remaining == 0) {
+                group.push(elements[i]);
+                result.add(new ArrayList<>(group));
+                group.pop();
+            } else if (remaining > 0) {
+                group.push(elements[i]);
+                findCombinationSum(remaining, end - 1, group);
+                group.pop();
             }
-            return;
-        }
-
-        if (tmpResult > target) {
-            group.removeLast();
         }
     }
 
-    private int reduce(List<Integer> group) {
-        return group.stream().reduce((a, b) -> a + b).orElse(0);
-    }
+
 }
