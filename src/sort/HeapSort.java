@@ -16,7 +16,7 @@ public class HeapSort extends AbstractHeap<Integer> {
 
     @Override
     protected boolean compare(Integer e, Integer e2) {
-        return e > e2;
+        return e < e2;
     }
 
     private HeapSort(List<Integer> list) {

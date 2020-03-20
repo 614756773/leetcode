@@ -13,7 +13,7 @@ public abstract class AbstractHeap<E> {
     // 下一个元素存放的位置，当前元素的数量
     private int index = 0;
 
-    public boolean add(E e) {
+    public void add(E e) {
         if (e == null) {
             throw new IllegalArgumentException("不允许null元素插入");
         }
@@ -21,12 +21,7 @@ public abstract class AbstractHeap<E> {
             grow();
         }
         elements[index++] = e;
-        if (index == 0) {
-            return true;
-        } else {
-            shiftUp(index - 1, e);
-            return true;
-        }
+        shiftUp(index - 1, e);
     }
 
     @SuppressWarnings("unchecked")
@@ -77,22 +72,22 @@ public abstract class AbstractHeap<E> {
             return;
         }
 
-        int current = 0;
-        int child;
+        int currentIndex = 0;
+        int childIndex;
         int left = 1;
-        child = elements[left + 1] == null ? left : min(left, left + 1);
+        childIndex = elements[left + 1] == null ? left : min(left, left + 1);
 
         // 把元素向下移动
-        while (!compare((E) elements[current], (E) elements[child])) {
-            E tmp = (E) elements[current];
-            elements[current] = elements[child];
-            elements[child] = tmp;
-            current = child;
-            left = (child << 1) + 1;
+        while (!compare((E) elements[currentIndex], (E) elements[childIndex])) {
+            E tmp = (E) elements[currentIndex];
+            elements[currentIndex] = elements[childIndex];
+            elements[childIndex] = tmp;
+            currentIndex = childIndex;
+            left = (childIndex << 1) + 1;
             if (elements[left] == null) {
                 break;
             }
-            child = elements[left + 1] == null ? left : min(left, left + 1);
+            childIndex = elements[left + 1] == null ? left : min(left, left + 1);
         }
     }
 
