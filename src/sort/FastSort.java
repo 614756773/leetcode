@@ -11,7 +11,7 @@ public class FastSort {
     public static void main(String[] args) {
         System.out.println(1/2);
         sort(0, a.length - 1);
-        System.out.println(Stream.of(a).map(e -> Arrays.toString(e) + "").collect(Collectors.joining(",")));
+        System.out.println(Stream.of(a).map(Arrays::toString).collect(Collectors.joining(",")));
     }
 
     private static void sort(int low, int high) {
@@ -22,7 +22,8 @@ public class FastSort {
         //记录当前分组的最左侧和最右侧
         int left = low;
         int right = high;
-        int key = a[low];//用于比较的关键值
+        //用于比较的关键值
+        int key = a[low];
         int tmp;
         while (low < high) {
             //把比关键字大的放右边
