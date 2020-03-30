@@ -1,10 +1,25 @@
 package com.simple;
 
+import dataStructure.TreeNode;
+
 /**
  * @author qinzhu
  * @since 2020/3/30
  * 思路：首先想到二叉搜索树的特征，即父节点永远是中间值
- * 根据这个特点就可以先中序遍历得到有序的列表，然后计算a，b两点的中间值，这个点就是最近的祖先
+ * 根据这个特点可以判断p，q节点位于根节点的左侧还是右侧
  */
 public class 二叉搜索树的最近公共祖先 {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        // 情形1：p和q在根节点的两侧
+        if ((p.val - root.val) * (q.val - root.val) <= 0) {
+            return root;
+        }
+        // 情形2：p在根节点的左侧（因为情形1执行过,所以p,q肯定是同侧,即q也在左侧）
+        if (p.val < root.val) {
+            return lowestCommonAncestor(root.left, p, q);
+        } else {
+            // 情形3：p,q在根节点右侧
+            return lowestCommonAncestor(root.right, p, q);
+        }
+    }
 }
