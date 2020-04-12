@@ -1,6 +1,6 @@
 package com.simple;
 
-import dataStructure.TreeNode;
+import datastructure.TreeNode;
 
 /**
  * @author qinzhu

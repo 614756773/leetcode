@@ -1,6 +1,6 @@
 package com.simple;
 
-import dataStructure.TreeNode;
+import datastructure.TreeNode;
 
 /**
  * 思路：将节点的左右孩子交换，然后递归处理左右孩子

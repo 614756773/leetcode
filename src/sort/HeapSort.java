@@ -1,6 +1,6 @@
 package sort;
 
-import dataStructure.AbstractHeap;
+import datastructure.AbstractHeap;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,6 +1,6 @@
 package com.simple;
 
-import dataStructure.TreeNode;
+import datastructure.TreeNode;
 
 public class 路径总和 {
     private boolean flag = false;

@@ -1,6 +1,6 @@
 package com.simple;
 
-import dataStructure.TreeNode;
+import datastructure.TreeNode;
 
 /**
  * 思路：递归获取左右子树的高度进行比较，如果差值大于1则不平衡，返回-1

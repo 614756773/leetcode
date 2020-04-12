@@ -1,4 +1,4 @@
-package dataStructure;
+package datastructure;
 
 /**
  * @Date: 2019/8/19

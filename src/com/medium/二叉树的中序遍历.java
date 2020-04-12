@@ -1,6 +1,6 @@
 package com.medium;
 
-import dataStructure.TreeNode;
+import datastructure.TreeNode;
 
 import java.util.*;
 

@@ -1,6 +1,6 @@
 package com.simple;
 
-import dataStructure.TreeNode;
+import datastructure.TreeNode;
 
 public class 左叶子之和 {
     public int sumOfLeftLeaves(TreeNode root) {

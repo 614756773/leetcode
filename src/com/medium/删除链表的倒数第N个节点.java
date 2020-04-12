@@ -1,6 +1,6 @@
 package com.medium;
 
-import dataStructure.ListNode;
+import datastructure.ListNode;
 
 /**
  * @Date: 2019/8/23

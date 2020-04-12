@@ -1,6 +1,6 @@
 package com.simple;
 
-import dataStructure.ListNode;
+import datastructure.ListNode;
 
 /**
  * @Date: 2019/9/2
