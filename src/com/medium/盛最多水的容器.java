@@ -3,6 +3,10 @@ package com.medium;
 /**
  * @Date: 2019/6/21
  * @Author: qinzhu
+ * 思路：
+ * 使用双指针，一头一尾，
+ * 每次移动都保留height值更高的指针，让后往中间靠拢直到两指针相遇
+ * 在移动的过程中计算出盛水的容量，如果大于最大值则替换
  */
 public class 盛最多水的容器 {
     public static void main(String[] args) {
@@ -12,22 +16,19 @@ public class 盛最多水的容器 {
     }
 
     private static int maxArea(int[] height) {
+        int ans = 0;
         int head = 0;
         int tail = height.length - 1;
-        int max = 0;
-        while (head < tail) {
-            int w = tail - head;
-            int h = Math.min(height[head], height[tail]);
-            int s = w * h;
-            max = s > max ? s : max;
-
-            if (height[tail] > height[head]) {
-                head++;
-            } else {
+        while(head > tail) {
+            int s = (tail - head) * Math.min(height[head], height[tail]);
+            ans = Math.max(ans, s);
+            if(height[head] > height[tail]) {
                 tail--;
+            } else {
+                head++;
             }
         }
-        return max;
+        return ans;
     }
 
 }
