@@ -9,6 +9,10 @@ import java.util.List;
 /**
  * @author qinzhu
  * @since 2020/3/26
+ * 思路：
+ *  使用队列实现bfs，每层都是一个队列，
+ *  要生成结果时把当前队列数据取出来放入list即可
+ *  要向下一层搜索时，使用一个新的队列来存储当前队列（也就是当前层）的左右子节点
  */
 public class 二叉树的层次遍历 {
     public List<List<Integer>> levelOrder(TreeNode root) {
