@@ -3,6 +3,7 @@ package com.swordoffer;
 /**
  * @author: hotpot
  * @since: 2020/09/21
+ * 思路：从右往左找，从上往下找。（有点跳表的感觉，向前还是向下）
  */
 public class 二维数组中的查找_3 {
     /**
