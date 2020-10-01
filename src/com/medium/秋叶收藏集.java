@@ -41,7 +41,7 @@ public class 秋叶收藏集 {
 
             // 主要的递推过程
             dp[i][0] = dp[i - 1][0] + isYellow(chars[i]);
-            dp[i][1] = Math.min(dp[i - 1][0], dp[i - 1][1]) + isRead(chars[i]);
+            dp[i][1] = Math.min(dp[i - 1][0], dp[i - 1][1]) + isRed(chars[i]);
             dp[i][2] = Math.min(dp[i - 1][1], dp[i - 1][2]) + isYellow(chars[i]);
         }
 
@@ -52,7 +52,7 @@ public class 秋叶收藏集 {
         return ch == 'y' ? 1 : 0;
     }
 
-    private int isRead(char ch) {
+    private int isRed(char ch) {
         return ch == 'r' ? 1 : 0;
     }
 }
