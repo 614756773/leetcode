@@ -7,18 +7,8 @@ import java.util.*;
  * @since 2020/11/6
  */
 public class 根据数字二进制下1的数目排序 {
-    // TODO
     public static void main(String[] args) {
-        System.out.println(new 根据数字二进制下1的数目排序().compare(4,8));
-//        int[] num = {3, 1, 2, 4};
-//        test(num);
-//        test(null);
-//        test(new int[]{});
-//        test(new int[]{6,1,4,7,5,6,7,7,3});
-//        test(new int[]{1,2,3,4,5,6,7,8,9});
-//        test(new int[]{9,8,7,6,5,4,3,2,1});
-        test(new int[]{0,1,2,3,4,5,6,7,8});
-
+        System.out.println(new 根据数字二进制下1的数目排序().compare(1,1024));
     }
 
     private static void test(int[] num) {
@@ -29,15 +19,7 @@ public class 根据数字二进制下1的数目排序 {
         if (arr == null || arr.length == 0) {
             return null;
         }
-        List<Integer> list = new ArrayList<>(arr.length);
-        for (int a : arr) {
-            list.add(a);
-        }
-        list.sort(this::compare);
-        for (int i = 0; i < list.size(); i++) {
-            arr[i] = list.get(i);
-        }
-//        quicklySort(arr, 0, arr.length - 1);
+        quicklySort(arr, 0, arr.length - 1);
         return arr;
     }
 
@@ -89,7 +71,7 @@ public class 根据数字二进制下1的数目排序 {
         } else if (aBitCount < bBitCount) {
             return -1;
         } else {
-            return a > b ? 1 : 0;
+            return a > b ? 1 : -1;
         }
     }
 
