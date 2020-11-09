@@ -9,12 +9,11 @@ public class FastSort {
     private static int[] a = {1, 1, 3, 8, 7, 3, 2, 0, 4, 1};
 
     public static void main(String[] args) {
-        System.out.println(1/2);
         sort(0, a.length - 1);
         System.out.println(Stream.of(a).map(Arrays::toString).collect(Collectors.joining(",")));
     }
 
-    private static void sort(int low, int high) {
+    public static void sort(int low, int high) {
         //这个判断很重要 不然排好序后还会一直递归调用sort函数
         if (low >= high) {
             return;
