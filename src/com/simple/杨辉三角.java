@@ -12,10 +12,7 @@ import java.util.List;
  */
 public class 杨辉三角 {
     public static void main(String[] args) {
-        int a = -9;
-        System.out.println(Integer.toBinaryString(a));
-        System.out.println(Integer.toBinaryString(a >>> 3));
-        System.out.println(a >>> 3);
+        System.out.println(new 杨辉三角().generate(5));
     }
 
     public List<List<Integer>> generate(int numRows) {
