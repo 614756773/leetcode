@@ -100,6 +100,16 @@ public class 扁平化多级双向链表 {
         return head;
     }
 
+    /**
+     * 递归函数的定义：
+     * 1.将多级链表拉扁平
+     * 2.返回链表的尾结点
+     *
+     * case 1: 节点为空，直接返回
+     * case 2：节点没有child，那么节点往后移动
+     * case 3：节点有child，那么递归处理，subTail = dfs(node.child); 然后把链表串起来
+     * case 4: 节点没有child，没有next，那它就是tail，直接返回
+     */
     private Node dfs(Node node) {
         if (node == null) {
             return node;
