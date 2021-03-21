@@ -1,5 +1,7 @@
 package com.medium;
 
+import java.util.LinkedList;
+
 /**
  * @author hotpot
  * @since 2020-04-20 21:28:45
@@ -14,35 +16,56 @@ public class 岛屿数量 {
                 {'1','1','0','0','0'},{'0','0','0','0','0'}};
         System.out.println(new 岛屿数量().numIslands(grid));
     }
-
-    private char[][] grid;
     private int ans = 0;
 
     public int numIslands(char[][] grid) {
-        this.grid = grid;
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[i].length; j++) {
-                if (grid[i][j] == '1') {
-                    dfs(i, j);
-                    ans++;
+        if (grid == null || grid.length == 0) {
+            return ans;
+        }
+        for (int row = 0; row < grid.length; row++) {
+            for (int col = 0; col < grid[row].length; col++) {
+                if (grid[row][col] == '0') {
+                    continue;
                 }
+                ans++;
+                bfsInfection(grid, row, col);
             }
         }
         return ans;
     }
 
-    private void dfs(int x, int y) {
-        if (x < 0 || x >= grid.length || y < 0 || y >= grid[x].length) {
-            return;
+    private void bfsInfection(char[][] grid, int row, int col) {
+        LinkedList<int[]> queue = new LinkedList<>();
+        queue.addLast(new int[]{row, col});
+        while (!queue.isEmpty()) {
+            int[] pair = queue.removeFirst();
+            int i = pair[0];
+            int j = pair[1];
+            if (i < 0 || j < 0 || i >= grid.length || j >= grid[0].length) {
+                continue;
+            }
+            if (grid[i][j] == '0') {
+                continue;
+            }
+            grid[i][j] = '0';
+            queue.addLast(new int[]{i, j - 1});
+            queue.addLast(new int[]{i, j + 1});
+            queue.addLast(new int[]{i - 1, j});
+            queue.addLast(new int[]{i + 1, j});
         }
-        if (grid[x][y] != '1') {
-            return;
-        }
+    }
 
-        grid[x][y] = 'a';
-        dfs(x + 1, y);
-        dfs(x - 1, y);
-        dfs(x, y + 1);
-        dfs(x, y - 1);
+    private void dfsInfection(char[][] grid, int row, int col) {
+        if (row < 0 || col < 0 || row >= grid.length || col >= grid[0].length) {
+            return;
+        }
+        if (grid[row][col] == '0') {
+            return;
+        }
+        grid[row][col] = '0';
+        dfsInfection(grid, row, col - 1);
+        dfsInfection(grid, row, col + 1);
+        dfsInfection(grid, row - 1, col);
+        dfsInfection(grid, row + 1, col);
     }
 }
