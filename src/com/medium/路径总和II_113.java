@@ -3,6 +3,7 @@ package com.medium;
 import datastructure.TreeNode;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -17,32 +18,25 @@ public class 路径总和II_113 {
         if (root == null) {
             return res;
         }
-        dfs(root, 0, sum, new ArrayList<>());
+        dfs(root, 0, sum, new LinkedList<>());
         return res;
     }
 
-    private void dfs(TreeNode root, int curSum, int target, List<Integer> tmpList) {
+    private void dfs(TreeNode root, int curSum, int target, LinkedList<Integer> tmpList) {
         if (root == null) {
+            return;
+        }
+        if (curSum == target && root.left == null && root.right == null) {
+            res.add(new LinkedList<>(tmpList));
             return;
         }
 
         curSum += root.val;
-        tmpList.add(root.val);
-        if (curSum == target && root.left == null && root.right == null) {
-            res.add(new ArrayList<>(tmpList));
-        }
-
+        tmpList.addLast(root.val);
         dfs(root.left, curSum, target, tmpList);
         dfs(root.right, curSum, target, tmpList);
-
-        int rmIndex = -1;
-        for (int i = tmpList.size() - 1; i >= 0; i--) {
-            if (tmpList.get(i) == root.val) {
-                rmIndex = i;
-                break;
-            }
-        }
-        tmpList.remove(rmIndex);
+        // 将35行插入的当前节点给移除掉，这儿就是在回溯
+        tmpList.removeLast();
     }
 
 }
