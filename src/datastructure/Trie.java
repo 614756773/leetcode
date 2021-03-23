@@ -15,10 +15,14 @@ public class Trie {
         t.insert("hello hmm");
         System.out.println(t.searchPrefix("hello"));
         System.out.println(t.searchPrefix("hmm"));
+        System.out.println(t.search("hello world"));
     }
 
     private Node root = new Node();
 
+    /**
+     * 插入
+     */
     public void insert(String str) {
         Node node = root;
         for (int i = 0; i < str.length(); i++) {
@@ -31,11 +35,17 @@ public class Trie {
         node.setEnd(true);
     }
 
+    /**
+     * 查询
+     */
     public boolean search(String str) {
         Node node = searchPrefix(str);
         return node != null && node.isEnd();
     }
 
+    /**
+     * 查询前缀是否存在
+     */
     public Node searchPrefix(String strPrefix) {
         Node node = root;
         for (int i = 0; i < strPrefix.length(); i++) {
